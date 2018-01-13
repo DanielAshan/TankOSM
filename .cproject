@@ -92,4 +92,5 @@
 			<resource resourceType="PROJECT" workspacePath="/RPiLAB_DISC_BASE"/>
 		</configuration>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cproject>

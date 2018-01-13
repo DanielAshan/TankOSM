@@ -9,6 +9,7 @@
 #define SRC_MAIN_H_
 
 #include "settings.h"
+#include "engine.h"
 #ifdef RPiLAB_RPi
 #include <uspienv.h>
 #include <uspi.h>

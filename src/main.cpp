@@ -11,6 +11,8 @@ char credits[51]="        RPiLAB                DEMO                ";
 #endif
 long TimerIsrPeriod = 1;            //czas podany w milisekundach
 
+
+
 #define MaxObj 10000
 int dx[MaxObj];
 int dy[MaxObj];
@@ -36,8 +38,11 @@ int main(void) {
 		Synchronize();
 		ClearScreen();
 		if (JoYAct.ButtonStates & BUTTON_SELECT) continue;
-		DrawObjects();
 
+//		DrawObjects();
+		Player player (100, 100);
+		Engine engine(player);
+		engine.draw();
 	}
 }
 
