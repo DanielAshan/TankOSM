@@ -12,7 +12,6 @@ char credits[51]="        RPiLAB                DEMO                ";
 long TimerIsrPeriod = 1;            //czas podany w milisekundach
 
 
-
 #define MaxObj 10000
 int dx[MaxObj];
 int dy[MaxObj];
@@ -29,19 +28,23 @@ int stage = 0;
 int frame_count = 0;
 int Jxt = 0, Jyt = 0, Jx = 0, Jy = 0, Jz = 0, JRz = 0;
 
+Player player(0, 100);
+Engine engine(player);
+
 int main(void) {
 	if (SystemInit())		return EXIT_HALT;
 	DataPrepare();
+
+
 	while (1) {
 		if (UpdateIO())	return 0;
-		PrintDiagnosticInfo();
+		PrintDiagnosticInfo(player.position[0], player.position[1]);
 		Synchronize();
 		ClearScreen();
 		if (JoYAct.ButtonStates & BUTTON_SELECT) continue;
 
 //		DrawObjects();
-		Player player (100, 100);
-		Engine engine(player);
+
 		engine.draw();
 	}
 }
@@ -134,7 +137,7 @@ void ClearScreen() {
 		GRAPH[a] = ((GRAPH[a] & 0xfefefe) >> 1) | bckgcol;
 	}
 }
-void PrintDiagnosticInfo() {
+void PrintDiagnosticInfo(int x, int y) {
 	frame_count++;
 #ifdef RPiLAB_RPi
 	TString strbuf;
@@ -147,7 +150,7 @@ void PrintDiagnosticInfo() {
 
 #ifdef RPiLAB_WIN
 	char strbuf[1000];
-	sprintf(strbuf,"%i: %i, %i, %i, %x\r\n",frame_count,getKey(), Jx, Jy,JoYAct.ButtonStates);
+	sprintf(strbuf,"%i: %i, %i, %i, %x\r\n",frame_count,getKey(), player.position[0], player.position[1],JoYAct.ButtonStates);
 	if((frame_count%20)==0) StringUart(strbuf);
 #endif
 }

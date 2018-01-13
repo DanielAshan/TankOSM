@@ -29,5 +29,5 @@ int SystemInit();
 void DataPrepare();
 void ClearScreen();
 void DrawObjects();
-void PrintDiagnosticInfo();
+void PrintDiagnosticInfo(int x, int y);
 #endif /* SRC_MAIN_H_ */
