@@ -3,6 +3,8 @@
 //#ifndef PLAYER_H
 //#define PLAYER_H
 
+extern unsigned long* GRAPH;
+
 class Player {
 	private:
 
@@ -31,6 +33,7 @@ class Player {
 	int getLives();
 	int getDirection();
 
+	void setNewPosition(int x, int y);
 	void setDirection(int dir);
 	void setCollider();
 	void move();

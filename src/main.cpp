@@ -23,6 +23,7 @@ int yt[MaxObj];
 
 unsigned long* SCREEN;
 unsigned long SCREENBUF[640 * 480];
+unsigned long* GRAPH = SCREENBUF;
 int mode = 0;
 int stage = 0;
 int frame_count = 0;
@@ -35,7 +36,7 @@ int main(void) {
 	if (SystemInit())		return EXIT_HALT;
 	DataPrepare();
 
-
+	engine.createEnemies();
 	while (1) {
 		if (UpdateIO())	return 0;
 		PrintDiagnosticInfo(player.position[0], player.position[1]);

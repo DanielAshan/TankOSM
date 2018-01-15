@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include "peripherals.h"
 
-extern unsigned long SCREENBUF[640 * 480];
-unsigned long* GRAPH = SCREENBUF;
+
 
 Player::Player(int x, int y)
 {
@@ -32,6 +31,13 @@ int Player::getLives()
 int Player::getDirection()
 {
 	return this->direction;
+}
+
+
+void Player::setNewPosition(int x, int y)
+{
+	this->position[0] = x;
+	this->position[1] = y;
 }
 
 void Player::setDirection(int dir)
