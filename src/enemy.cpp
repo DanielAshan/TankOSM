@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "peripherals.h"
 
-extern unsigned long* GRAPH;
+
 
 Enemy::Enemy(int id, int hp, int type, int score, int x, int y, int dir)
 {
@@ -55,7 +55,7 @@ void Enemy::setCollider()
 
 }
 
-void Enemy::draw()
+void Enemy::draw(unsigned long* GRAPH)
 {
 	for(int i=0; i<=39; i++) {
 		for(int j=0; j<=39; j++) {

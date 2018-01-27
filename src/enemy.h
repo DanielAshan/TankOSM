@@ -29,5 +29,5 @@ public:
 	void setDirection(int dir);
 	void setCollider();
 	void move();
-	void draw();
+	void draw(unsigned long* GRAPH);
 };

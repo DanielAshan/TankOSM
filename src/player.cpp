@@ -71,7 +71,7 @@ void Player::setCollider()
 	}
 }
 
-void Player::draw()
+void Player::draw(unsigned long* GRAPH)
 {
 	for(int i=0; i<=39; i++) {
 			for(int j=0; j<=39; j++) {
@@ -101,5 +101,36 @@ void Player::draw()
 
 void Player::move()
 {
+			if((int) JoYAct.AxisX/100 > 0){
+				this->setDirection(3);
+				this->position[0] += (int) JoYAct.AxisX/100;
+			} else if((int) JoYAct.AxisX/100 < 0){
+				this->setDirection(1);
+				this->position[0] += (int) JoYAct.AxisX/100;
+			} else if((int) JoYAct.AxisY/100 > 0){
+				this->setDirection(4);
+				this->position[1] += (int) JoYAct.AxisY/100;
+			} else if((int) JoYAct.AxisY/100 < 0){
+				this->setDirection(2);
+				this->position[1] += (int) JoYAct.AxisY/100;
+			}
 
+}
+void Player::reloading(){
+	if (this->reloadTimer > 0) {
+		this->reloadTimer -= 1;
+		if(this->reloadTimer == 0) {
+			this->canShoot = true;
+		}
+	}
+
+}
+bool Player::shoot(){
+	if(this->canShoot){
+		this->reloadTimer = 100;
+		this->canShoot = false;
+		return true;
+	} else {
+		return false;
+	}
 }

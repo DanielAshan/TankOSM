@@ -20,6 +20,7 @@ int x[MaxObj];
 int y[MaxObj];
 int xt[MaxObj];
 int yt[MaxObj];
+int bullet;
 
 unsigned long* SCREEN;
 unsigned long SCREENBUF[640 * 480];
@@ -29,24 +30,25 @@ int stage = 0;
 int frame_count = 0;
 int Jxt = 0, Jyt = 0, Jx = 0, Jy = 0, Jz = 0, JRz = 0;
 
-Player player(0, 100);
-Engine engine(player);
 
 int main(void) {
 	if (SystemInit())		return EXIT_HALT;
 	DataPrepare();
+	Player player(100, 100);
+		Engine engine(player);
+		engine.createEnemies();
 
-	engine.createEnemies();
 	while (1) {
 		if (UpdateIO())	return 0;
 		PrintDiagnosticInfo(player.position[0], player.position[1]);
 		Synchronize();
 		ClearScreen();
 		if (JoYAct.ButtonStates & BUTTON_SELECT) continue;
-
-//		DrawObjects();
-
-		engine.draw();
+		engine.playerShoot();
+		engine.reloading();
+		engine.move();
+		engine.draw(SCREENBUF);
+		bullet = engine.bulletCounter;
 	}
 }
 
@@ -151,7 +153,7 @@ void PrintDiagnosticInfo(int x, int y) {
 
 #ifdef RPiLAB_WIN
 	char strbuf[1000];
-	sprintf(strbuf,"%i: %i, %i, %i, %x\r\n",frame_count,getKey(), player.position[0], player.position[1],JoYAct.ButtonStates);
+	sprintf(strbuf,"%i: %i, %i, %i, %x\r\n",frame_count,getKey(), 1, 1,JoYAct.ButtonStates);
 	if((frame_count%20)==0) StringUart(strbuf);
 #endif
 }
